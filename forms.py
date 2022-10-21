@@ -1,6 +1,6 @@
 """Forms for adopt app."""
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField
+from wtforms import StringField, SelectField, TextAreaField, RadioField
 from wtforms.validators import InputRequired, Optional, Length, URL
 
 
@@ -47,5 +47,33 @@ class AddPetForm(FlaskForm):
         validators=[
             InputRequired(),
             Length(min=-1, max=50, message="Maximum length is 50 characters")
+        ]  # can remove min parameter
+    )
+
+
+class EditPetForm(FlaskForm):
+    """ Form for editing pet information """
+
+    photo_url = StringField(
+        "Photo URL",
+        validators=[Optional(), URL()]
+    )
+
+    notes = TextAreaField(
+        "Notes",
+        validators=[
+            InputRequired(),
+            Length(min=-1, max=50, message="Maximum length is 50 characters")
         ]
     )
+
+    available = RadioField(
+        "Pet Availability",
+        choices=[
+            ('True', 'Available'),
+            ('False', 'Not Available'),
+        ],
+        # coerce=lambda x: x == 'True',
+        validators=[InputRequired()]
+    )
+    #

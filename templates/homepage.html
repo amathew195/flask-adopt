@@ -5,11 +5,13 @@
 {% block content %}
 <h1>Pets</h1>
 
+<a href="/add">Add a new pet!</a>
+
 {% for pet in pets %}
 
 <div>
 
-  <h3>{{pet.name}}</h3>
+  <h3><a href="/{{pet.id}}">{{pet.name}}</a></h3>
   <img src="{{pet.photo_url}}" alt="">
   {% if pet.available %}
   <b>Available</b>
